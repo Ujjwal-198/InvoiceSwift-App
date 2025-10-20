@@ -1,0 +1,28 @@
+{
+  "name": "invoiceswift-01",
+  "version": "1.0.0",
+  "description": "Invoice management application with React frontend and Node.js backend",
+  "main": "index.js",
+  "scripts": {
+    "install-backend": "cd backend && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "install-all": "npm run install-backend && npm run install-frontend",
+    "dev-backend": "cd backend && npm run dev",
+    "dev-frontend": "cd frontend && npm run dev",
+    "build-frontend": "cd frontend && npm run build",
+    "start-backend": "cd backend && npm start",
+    "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
+    "build": "npm run build-frontend"
+  },
+  "keywords": [
+    "invoice",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Ujjwal Singh",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
