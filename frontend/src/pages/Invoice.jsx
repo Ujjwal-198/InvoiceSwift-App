@@ -160,7 +160,7 @@ const Invoice = () => {
                         </button>
 
                         <button
-                            onClick={() => { authenticated ? handleDownloadInvoice : alert('Please Login/Signup to Save Invoice') }}
+                            onClick={() => handleDownloadInvoice()}
                             disabled={isGenerating}
                             className="flex flex-row items-center justify-center gap-2 px-5 py-2 rounded-full text-white font-medium transition bg-gray-800 hover:bg-gray-900 cursor-pointer"
                         >
