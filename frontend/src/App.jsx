@@ -34,6 +34,8 @@ function App() {
             <Route path='dashboard' element={<Dashboard />} />
           </Route>
 
+          {/* Catch-all route */}
+          <Route path='*' element={<Home />} />
         </Route>
       </Routes>
     </>
