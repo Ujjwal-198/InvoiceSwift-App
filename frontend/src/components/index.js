@@ -7,5 +7,6 @@ import InvoicePDF from "./InvoicePDF.jsx";
 import UserInvoices from "./UserInvoices.jsx";
 import AuthRequired from "./AuthRequired.jsx";
 import ProtectedRoutes from "./ProtectedRoutes.jsx";
+import Popup from "./Popup.jsx";
 
-export { Header, Footer, InvoiceTable, InvoiceHeader1, InvoiceFooter, InvoicePDF, UserInvoices,AuthRequired, ProtectedRoutes };
+export { Header, Footer, InvoiceTable, InvoiceHeader1, InvoiceFooter, InvoicePDF, UserInvoices,AuthRequired, ProtectedRoutes, Popup };
