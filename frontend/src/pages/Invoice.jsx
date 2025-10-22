@@ -101,7 +101,7 @@ const Invoice = () => {
         try {
             await dispatch(handleSaveInvoice(data)).unwrap();
             formMethods.reset(defaultValues);
-            alert("Invoice saved successfully!");
+            alert("Invoice saved successfully! You can access it in the 'My Invoices/profile' section.");
         } catch (err) {
             const msg = extractErrorMessage(err);
             setViewError(msg);
