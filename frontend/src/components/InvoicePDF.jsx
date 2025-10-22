@@ -72,21 +72,21 @@ const styles = StyleSheet.create({
 
 const InvoicePDF = ({ formData = {} }) => {
   const {
-    invoiceNumber = "2",
-    date = "2025-10-19",
-    dueDate = "2025-10-15",
+    invoiceNumber = "",
+    date = "",
+    dueDate = "",
     companyInfo = {},
     clientInfo = {},
-    lineItems = [{ itemName: "Item 99", quantity: 8, price: 2.50, total: 20.00 }],
-    subtotal = 20.00,
+    lineItems = [],
+    subtotal = 0,
     discount = 0,
     tax = 0,
     shipping = 0,
-    total = 20.00,
+    total = 0,
     amountPaid = 0,
-    balanceDue = 20.00,
-    notes = "N/A",
-    terms = "N/A",
+    balanceDue = 0,
+    notes = "",
+    terms = "",
   } = formData;
 
   return (
@@ -100,17 +100,17 @@ const InvoicePDF = ({ formData = {} }) => {
         <View style={styles.section}>
           <View style={styles.infoBlock}>
             <Text style={styles.label}>Issued By</Text>
-            <Text style={styles.text}>Name: {companyInfo.name || "Something"}</Text>
-            <Text style={styles.text}>Address: {companyInfo.address || "ABC street 123"}</Text>
-            <Text style={styles.text}>Email: {companyInfo.email || "example@email.com"}</Text>
-            <Text style={styles.text}>Phone: {companyInfo.phone || "8744814775"}</Text>
+            <Text style={styles.text}>Name: {companyInfo.name || ""}</Text>
+            <Text style={styles.text}>Address: {companyInfo.address || ""}</Text>
+            <Text style={styles.text}>Email: {companyInfo.email || ""}</Text>
+            <Text style={styles.text}>Phone: {companyInfo.phone || ""}</Text>
           </View>
           <View style={styles.infoBlock}>
             <Text style={styles.label}>Issued To</Text>
-            <Text style={styles.text}>Name: {clientInfo.name || "Something"}</Text>
-            <Text style={styles.text}>Address: {clientInfo.address || "XYZ street 123"}</Text>
-            <Text style={styles.text}>Email: {clientInfo.email || "example@email.com"}</Text>
-            <Text style={styles.text}>Phone: {clientInfo.phone || "1234567890"}</Text>
+            <Text style={styles.text}>Name: {clientInfo.name || ""}</Text>
+            <Text style={styles.text}>Address: {clientInfo.address || ""}</Text>
+            <Text style={styles.text}>Email: {clientInfo.email || ""}</Text>
+            <Text style={styles.text}>Phone: {clientInfo.phone || ""}</Text>
           </View>
         </View>
 
@@ -125,8 +125,8 @@ const InvoicePDF = ({ formData = {} }) => {
             <View key={index} style={styles.tableRow}>
               <Text style={styles.col1}>{item.itemName}</Text>
               <Text style={styles.col2}>{item.quantity}</Text>
-              <Text style={styles.col3}>{item.price.toFixed(2)}</Text>
-              <Text style={styles.col4}>{item.total.toFixed(2)}</Text>
+              <Text style={styles.col3}>{Number(item.price || 0).toFixed(2)}</Text>
+              <Text style={styles.col4}>{Number(item.total || 0).toFixed(2)}</Text>
             </View>
           ))}
         </View>
@@ -142,31 +142,31 @@ const InvoicePDF = ({ formData = {} }) => {
           </View>
           <View style={styles.summaryRow}>
             <Text>Subtotal:</Text>
-            <Text>{subtotal.toFixed(2)}</Text>
+            <Text>{Number(subtotal || 0).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
             <Text>Discount (0%):</Text>
-            <Text>{(subtotal * discount / 100).toFixed(2)}</Text>
+            <Text>{(Number(subtotal || 0) * Number(discount || 0) / 100).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
             <Text>Tax (0%):</Text>
-            <Text>{(subtotal * tax / 100).toFixed(2)}</Text>
+            <Text>{(Number(subtotal || 0) * Number(tax || 0) / 100).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
             <Text>Shipping:</Text>
-            <Text>{shipping.toFixed(2)}</Text>
+            <Text>{Number(shipping || 0).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
             <Text style={styles.label}>Total:</Text>
-            <Text style={styles.label}>{total.toFixed(2)}</Text>
+            <Text style={styles.label}>{Number(total || 0).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
             <Text>Amount Paid:</Text>
-            <Text>{amountPaid.toFixed(2)}</Text>
+            <Text>{Number(amountPaid || 0).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
             <Text style={styles.label}>Balance Due:</Text>
-            <Text style={styles.label}>{balanceDue.toFixed(2)}</Text>
+            <Text style={styles.label}>{Number(balanceDue || 0).toFixed(2)}</Text>
           </View>
         </View>
       </Page>
