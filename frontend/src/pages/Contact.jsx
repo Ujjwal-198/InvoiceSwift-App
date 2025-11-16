@@ -143,19 +143,6 @@ const Contact = () => {
 
                     {/* Contact Info & Illustration */}
                     <div className="space-y-8">
-                        {/* Illustration */}
-                        <div className="flex justify-center">
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-20 transform rotate-6"></div>
-                                <div className="relative bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
-                                    <img
-                                        src={ContactIllustration}
-                                        alt="Contact Illustration"
-                                        className="w-full max-w-sm h-auto object-contain"
-                                    />
-                                </div>
-                            </div>
-                        </div>
 
                         {/* Contact Information */}
                         <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
