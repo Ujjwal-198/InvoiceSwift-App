@@ -9,10 +9,11 @@ import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 const Signup = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useDispatch();
-    const { user, authenticated, loading } = useSelector((state) => state.user);
+    const { user, authenticated } = useSelector((state) => state.user);
     const navigate = useNavigate();
     const [viewError, setViewError] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         if (authenticated) navigate('/dashboard');
@@ -21,11 +22,15 @@ const Signup = () => {
 
     const onSubmit = async (data) => {
         console.log('Form data in signup :', data);
+        setIsSubmitting(true);
+        setViewError(null);
         try {
             const result = await dispatch(handleSignup(data)).unwrap();
             console.log(result);
         } catch (error) {
             setViewError(error);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -156,10 +161,10 @@ const Signup = () => {
                                 {/* Submit Button */}
                                 <button
                                     type="submit"
-                                    disabled={loading}
-                                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                    disabled={isSubmitting}
+                                    className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                                 >
-                                    {loading ? 'Creating Account...' : 'Create Account'}
+                                    {isSubmitting ? 'Creating Account...' : 'Create Account'}
                                 </button>
 
                                 {/* Login Link */}
