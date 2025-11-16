@@ -157,26 +157,6 @@ const Login = () => {
                                     {isSubmitting ? 'Signing In...' : 'Sign In'}
                                 </button>
 
-                                {/* Test Connection Button */}
-                                <button
-                                    type="button"
-                                    onClick={async () => {
-                                        try {
-                                            const response = await fetch(import.meta.env.VITE_API_URL || 'http://localhost:8080/api/');
-                                            if (response.ok) {
-                                                alert('✅ Backend connection successful!');
-                                            } else {
-                                                alert('❌ Backend responded with error: ' + response.status);
-                                            }
-                                        } catch (error) {
-                                            alert('❌ Cannot connect to backend. Please ensure the server is running on port 8080.');
-                                        }
-                                    }}
-                                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors duration-200 text-sm"
-                                >
-                                    Test Backend Connection
-                                </button>
-
                                 {/* Signup Link */}
                                 <div className="text-center">
                                     <p className="text-gray-600">
