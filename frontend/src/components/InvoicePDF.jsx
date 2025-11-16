@@ -71,10 +71,13 @@ const styles = StyleSheet.create({
 });
 
 const InvoicePDF = ({ formData = {} }) => {
+  console.log("📄 INVOICE PDF - Received formData:", formData);
+  
   const {
     invoiceNumber = "",
     date = "",
     dueDate = "",
+    paymentTerms = "",
     companyInfo = {},
     clientInfo = {},
     lineItems = [],
@@ -87,14 +90,21 @@ const InvoicePDF = ({ formData = {} }) => {
     balanceDue = 0,
     notes = "",
     terms = "",
+    currency = "INR",
   } = formData;
+  
+  console.log("📄 INVOICE PDF - Extracted Values:");
+  console.log("  - Discount:", discount);
+  console.log("  - Tax:", tax);
+  console.log("  - Subtotal:", subtotal);
+  console.log("  - Total:", total);
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <Text style={styles.header}>SWIFT-INVOICE #{invoiceNumber}</Text>
         <Text style={styles.subHeader}>
-          Date: {date} | Payment Terms: {terms} | Due Date: {dueDate} | PO Number: N/A | Currency: INR
+          Date: {date} | Payment Terms: {paymentTerms} | Due Date: {dueDate} | PO Number: N/A | Currency: {currency}
         </Text>
 
         <View style={styles.section}>
@@ -145,11 +155,11 @@ const InvoicePDF = ({ formData = {} }) => {
             <Text>{Number(subtotal || 0).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
-            <Text>Discount (0%):</Text>
+            <Text>Discount ({Number(discount || 0)}%):</Text>
             <Text>{(Number(subtotal || 0) * Number(discount || 0) / 100).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>
-            <Text>Tax (0%):</Text>
+            <Text>Tax ({Number(tax || 0)}%):</Text>
             <Text>{(Number(subtotal || 0) * Number(tax || 0) / 100).toFixed(2)}</Text>
           </View>
           <View style={styles.summaryRow}>

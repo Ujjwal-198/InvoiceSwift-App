@@ -48,6 +48,11 @@ const Invoice = () => {
         try {
             setIsGenerating(true);
             const snapshot = JSON.parse(JSON.stringify(formMethods.getValues()));
+            console.log("🔍 INVOICE PAGE - Form Values Snapshot:", snapshot);
+            console.log("🔍 INVOICE PAGE - Discount:", snapshot.discount);
+            console.log("🔍 INVOICE PAGE - Tax:", snapshot.tax);
+            console.log("🔍 INVOICE PAGE - Subtotal:", snapshot.subtotal);
+            console.log("🔍 INVOICE PAGE - Total:", snapshot.total);
             setPdfData(snapshot);
 
             await new Promise((resolve) => setTimeout(resolve, 200));
@@ -55,7 +60,6 @@ const Invoice = () => {
 
             const url = URL.createObjectURL(pdfBlob);
             const link = document.createElement("a");
-            console.log("PDF Snapshot:", snapshot);
             link.href = url;
             link.download = `Invoice_${snapshot.invoiceNumber || "unnamed"}.pdf`;
             link.click();

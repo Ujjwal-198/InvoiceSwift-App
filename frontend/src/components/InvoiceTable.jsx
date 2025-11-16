@@ -15,7 +15,6 @@ const InvoiceTable = () => {
 
 
     const handleInputChange = (index, fieldName, value) => {
-
         setValue(`lineItems.${index}.${fieldName}`, parseFloat(value) || 0, { shouldValidate: true });
 
         if (fieldName === 'quantity' || fieldName === 'price') {
@@ -23,6 +22,8 @@ const InvoiceTable = () => {
             const currentPrice = fieldName === 'price' ? parseFloat(value) : watchedLineItems[index]?.price;
 
             const total = (Number(currentQuantity) || 0) * (Number(currentPrice) || 0);
+            console.log("📋 INVOICE TABLE - Line Item Calculation:");
+            console.log(`  - Item ${index}: Qty=${currentQuantity}, Price=${currentPrice}, Total=${total}`);
             setValue(`lineItems.${index}.total`, total.toFixed(2));
         }
     };
@@ -93,6 +94,10 @@ const InvoiceTable = () => {
                             </td>
                             {/* Total Display */}
                             <td className='p-1 px-5 text-gray-700 w-20'>
+                                <input
+                                    {...register(`lineItems.${index}.total`)}
+                                    type="hidden"
+                                />
                                 {watchedLineItems[index]?.total || '0.00'}
                             </td>
                             <td className="px-1 py-1 w-5 text-center">

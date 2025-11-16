@@ -53,11 +53,36 @@ const InvoiceFooter = () => {
     const balanceDue = total - amountPaidNum;
 
     React.useEffect(() => {
+        console.log("🔍 INVOICE FOOTER - Calculated Values:");
+        console.log("  - Discount %:", discountNum);
+        console.log("  - Tax %:", taxNum);
+        console.log("  - Subtotal:", subTotal);
+        console.log("  - Discount Amount:", calcDiscountAmount);
+        console.log("  - Tax Amount:", calcTaxAmount);
+        console.log("  - Total:", total);
+        console.log("  - Balance Due:", balanceDue);
+        
         setValue('balanceDue', Number((balanceDue || 0).toFixed(2)), {
             shouldValidate: true,
             shouldDirty: true,
         });
-    }, [balanceDue, setValue]);
+        setValue('subtotal', Number((subTotal || 0).toFixed(2)), {
+            shouldValidate: true,
+            shouldDirty: true,
+        });
+        setValue('total', Number((total || 0).toFixed(2)), {
+            shouldValidate: true,
+            shouldDirty: true,
+        });
+        setValue('discountAmount', Number((calcDiscountAmount || 0).toFixed(2)), {
+            shouldValidate: true,
+            shouldDirty: true,
+        });
+        setValue('taxAmount', Number((calcTaxAmount || 0).toFixed(2)), {
+            shouldValidate: true,
+            shouldDirty: true,
+        });
+    }, [balanceDue, subTotal, total, setValue, discountNum, taxNum, calcDiscountAmount, calcTaxAmount]);
 
 
     const formatCurrency = (amount, currencyCode) => {
