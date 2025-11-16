@@ -1,15 +1,14 @@
-// src/pages/Contact.jsx
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import ContactIllustration from '../assets/contact.svg';
-import { FiSend } from "react-icons/fi";
+import { FiSend, FiMail, FiPhone, FiMapPin } from "react-icons/fi";
+import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Contact = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         const phoneNumber = '918744814775';
-
         const message = `
             Name: ${data.name}
             Email: ${data.email}
@@ -21,67 +20,182 @@ const Contact = () => {
         reset();
     };
 
-    return (
-        <div className='flex align-middle justify-center items-center p-10 min-h-screen bg-[linear-gradient(to_right,#f3f4f6_1px,transparent_1px),linear-gradient(to_bottom,#f3f4f6_1px,transparent_1px)] bg-[size:150px_80px]'>
-            <div className='flex flex-row align-middle justify-center items-center shadow-2xl p-10 rounded-2xl bg-white'>
+    const contactInfo = [
+        {
+            icon: <FiMail className="text-xl" />,
+            title: "Email",
+            value: "ujjwalsingh.dev@gmail.com",
+            action: () => window.open('mailto:ujjwalsingh.dev@gmail.com')
+        },
+        {
+            icon: <FiPhone className="text-xl" />,
+            title: "Phone",
+            value: "+91 87448 14775",
+            action: () => window.open('tel:+918744814775')
+        },
+        {
+            icon: <FiMapPin className="text-xl" />,
+            title: "Location",
+            value: "India",
+            action: null
+        }
+    ];
 
-                {/* Illustration Section */}
-                <div className="hidden md:flex items-center justify-center bg-white p-5">
-                    <img
-                        src={ContactIllustration}
-                        alt="Contact Illustration"
-                        className="h-60 w-auto object-contain"
-                    />
+    const socialLinks = [
+        {
+            icon: <FaWhatsapp className="text-xl" />,
+            name: "WhatsApp",
+            url: "https://wa.me/918744814775",
+            color: "bg-green-500 hover:bg-green-600"
+        },
+        {
+            icon: <FaLinkedin className="text-xl" />,
+            name: "LinkedIn",
+            url: "https://www.linkedin.com/in/ujjwal-singh-b44256271",
+            color: "bg-blue-600 hover:bg-blue-700"
+        },
+        {
+            icon: <FaGithub className="text-xl" />,
+            name: "GitHub",
+            url: "https://github.com/Ujjwal-198",
+            color: "bg-gray-800 hover:bg-gray-900"
+        }
+    ];
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                {/* Header */}
+                <div className="text-center space-y-4 mb-16">
+                    <h1 className="text-4xl lg:text-5xl font-bold text-gray-900">
+                        Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
+                    </h1>
+                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Have questions about InvoiceSwift? I'd love to hear from you. Send me a message and I'll respond as soon as possible.
+                    </p>
                 </div>
 
-                {/* Form Section */}
-                <div className='flex flex-col gap-5'>
-                    <h1 className='text-xl font-semibold'>Contact Me</h1>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    {/* Contact Form */}
+                    <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+                        <div className="space-y-6">
+                            <div className="space-y-2">
+                                <h2 className="text-2xl font-bold text-gray-900">Send Message</h2>
+                                <p className="text-gray-600">Fill out the form below and I'll get back to you shortly.</p>
+                            </div>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className='flex flex-col md:py-0 py-5 gap-7 md:w-xs w-xs'>
+                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Full Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        {...register('name', { required: 'Name is required' })}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                        placeholder="Enter your full name"
+                                    />
+                                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+                                </div>
 
-                            {/* Name Input */}
-                            <input
-                                type='text'
-                                placeholder='Your Name'
-                                {...register('name', { required: 'Name is required' })}
-                                className='border rounded border-gray-500 focus:outline-none px-3 py-1 text-sm active:bg-transparent focus:bg-transparent focus:shadow'
-                            />
-                            {errors.name && <p className='text-red-500 text-xs'>{errors.name.message}</p>}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Email Address
+                                    </label>
+                                    <input
+                                        type="email"
+                                        {...register('email', {
+                                            required: 'Email is required',
+                                            pattern: {
+                                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                message: 'Enter a valid email address'
+                                            }
+                                        })}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                        placeholder="Enter your email address"
+                                    />
+                                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                                </div>
 
-                            {/* Email Input */}
-                            <input
-                                type='email'
-                                placeholder='Your Email'
-                                {...register('email', {
-                                    required: 'Email is required',
-                                    pattern: {
-                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                        message: 'Enter a valid email address'
-                                    }
-                                })}
-                                className='border rounded border-gray-500 focus:outline-none px-3 py-1 text-sm active:bg-transparent focus:bg-transparent focus:shadow'
-                            />
-                            {errors.email && <p className='text-red-500 text-xs'>{errors.email.message}</p>}
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Message
+                                    </label>
+                                    <textarea
+                                        {...register('message', { required: 'Message cannot be empty' })}
+                                        rows={5}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                        placeholder="Type your message here..."
+                                    />
+                                    {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+                                </div>
 
-                            {/* Message Textarea */}
-                            <textarea
-                                placeholder='Type your message here'
-                                {...register('message', { required: 'Message cannot be empty' })}
-                                className='border rounded border-gray-500 focus:outline-none px-3 py-1 min-h-10 min-w-50 text-sm active:bg-transparent focus:bg-transparent focus:shadow'
-                            />
-                            {errors.message && <p className='text-red-500 text-xs'>{errors.message.message}</p>}
-
-                            {/* Submit Button */}
-                            <button
-                                type='submit'
-                                className='flex gap-2 align-middle justify-center items-center bg-blue-500 px-2 py-1 text-white hover:bg-blue-600 cursor-pointer rounded'
-                            >
-                                Send Your Message <FiSend />
-                            </button>
+                                <button
+                                    type="submit"
+                                    className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+                                >
+                                    <span>Send Message</span>
+                                    <FiSend className="text-lg" />
+                                </button>
+                            </form>
                         </div>
-                    </form>
+                    </div>
+
+                    {/* Contact Info & Illustration */}
+                    <div className="space-y-8">
+                        {/* Illustration */}
+                        <div className="flex justify-center">
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur-2xl opacity-20 transform rotate-6"></div>
+                                <div className="relative bg-white rounded-3xl p-8 shadow-xl border border-gray-100">
+                                    <img
+                                        src={ContactIllustration}
+                                        alt="Contact Illustration"
+                                        className="w-full max-w-sm h-auto object-contain"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Contact Information */}
+                        <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+                            <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                            <div className="space-y-4">
+                                {contactInfo.map((info, index) => (
+                                    <div 
+                                        key={index} 
+                                        className={`flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 ${info.action ? 'cursor-pointer' : ''}`}
+                                        onClick={info.action}
+                                    >
+                                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            {React.cloneElement(info.icon, { className: "text-xl text-blue-600" })}
+                                        </div>
+                                        <div>
+                                            <p className="font-medium text-gray-900">{info.title}</p>
+                                            <p className="text-gray-600">{info.value}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Social Links */}
+                            <div className="mt-8 pt-6 border-t border-gray-200">
+                                <h4 className="text-lg font-semibold text-gray-900 mb-4">Follow Me</h4>
+                                <div className="flex space-x-4">
+                                    {socialLinks.map((social, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => window.open(social.url, '_blank', 'noopener,noreferrer')}
+                                            className={`w-12 h-12 ${social.color} text-white rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-md`}
+                                            title={social.name}
+                                        >
+                                            {social.icon}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
