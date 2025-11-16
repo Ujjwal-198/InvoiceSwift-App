@@ -24,11 +24,21 @@ const Login = () => {
         console.log('Form data in Login Page :', data);
         setIsSubmitting(true);
         setViewError(null);
+        
+        // Add timeout to prevent infinite loading
+        const timeoutId = setTimeout(() => {
+            setViewError('Request timeout. Please check your connection and try again.');
+            setIsSubmitting(false);
+        }, 10000); // 10 second timeout
+        
         try {
             const result = await dispatch(handleLogin(data)).unwrap();
-            console.log(result);
+            clearTimeout(timeoutId);
+            console.log('Login successful:', result);
         } catch (error) {
-            setViewError(error);
+            clearTimeout(timeoutId);
+            console.error('Login error:', error);
+            setViewError(error || 'Login failed. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
@@ -145,6 +155,26 @@ const Login = () => {
                                     className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                                 >
                                     {isSubmitting ? 'Signing In...' : 'Sign In'}
+                                </button>
+
+                                {/* Test Connection Button */}
+                                <button
+                                    type="button"
+                                    onClick={async () => {
+                                        try {
+                                            const response = await fetch(import.meta.env.VITE_API_URL || 'http://localhost:8080/api/');
+                                            if (response.ok) {
+                                                alert('✅ Backend connection successful!');
+                                            } else {
+                                                alert('❌ Backend responded with error: ' + response.status);
+                                            }
+                                        } catch (error) {
+                                            alert('❌ Cannot connect to backend. Please ensure the server is running on port 8080.');
+                                        }
+                                    }}
+                                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg font-medium transition-colors duration-200 text-sm"
+                                >
+                                    Test Backend Connection
                                 </button>
 
                                 {/* Signup Link */}

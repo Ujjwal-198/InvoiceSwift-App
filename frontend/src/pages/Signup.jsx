@@ -24,11 +24,21 @@ const Signup = () => {
         console.log('Form data in signup :', data);
         setIsSubmitting(true);
         setViewError(null);
+        
+        // Add timeout to prevent infinite loading
+        const timeoutId = setTimeout(() => {
+            setViewError('Request timeout. Please check your connection and try again.');
+            setIsSubmitting(false);
+        }, 10000); // 10 second timeout
+        
         try {
             const result = await dispatch(handleSignup(data)).unwrap();
-            console.log(result);
+            clearTimeout(timeoutId);
+            console.log('Signup successful:', result);
         } catch (error) {
-            setViewError(error);
+            clearTimeout(timeoutId);
+            console.error('Signup error:', error);
+            setViewError(error || 'Signup failed. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
