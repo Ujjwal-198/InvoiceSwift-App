@@ -103,7 +103,7 @@ const Services = () => {
                     <p className="text-xl text-blue-100 mb-8">
                         Join thousands of businesses already using InvoiceSwift to manage their billing efficiently
                     </p>
-                    <button className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-200 hover:scale-105 shadow-lg">
+                    <button onClick={() => navigate('/signup')} className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all duration-200 hover:scale-105 shadow-lg">
                         Get Started Today
                     </button>
                 </div>

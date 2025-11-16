@@ -54,7 +54,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 items-center justify-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-12">
@@ -68,27 +68,10 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {stats.map((stat, index) => (
-            <div key={index} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600 mb-1">{stat.title}</p>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                </div>
-                <div className={`w-12 h-12 ${stat.bgColor} rounded-lg flex items-center justify-center`}>
-                  {stat.icon}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Quick Actions */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {quickActions.map((action, index) => (
-            <div 
+            <div
               key={index}
               onClick={action.action}
               className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group border border-gray-100"
@@ -109,68 +92,6 @@ const Dashboard = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Recent Activity */}
-        <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Recent Activity</h2>
-            <button 
-              onClick={() => navigate('/profile')}
-              className="text-blue-600 hover:text-blue-700 font-medium"
-            >
-              View All
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                <FaFileInvoiceDollar className="text-blue-600" />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-gray-900">Invoice #INV-001 created</p>
-                <p className="text-sm text-gray-600">2 hours ago</p>
-              </div>
-              <span className="text-sm font-medium text-green-600">₹5,000</span>
-            </div>
-            
-            <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-              <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                <FaDollarSign className="text-green-600" />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-gray-900">Payment received for Invoice #INV-002</p>
-                <p className="text-sm text-gray-600">1 day ago</p>
-              </div>
-              <span className="text-sm font-medium text-green-600">₹7,500</span>
-            </div>
-            
-            <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-              <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                <FaClock className="text-orange-600" />
-              </div>
-              <div className="flex-1">
-                <p className="font-medium text-gray-900">Invoice #INV-003 is overdue</p>
-                <p className="text-sm text-gray-600">3 days ago</p>
-              </div>
-              <span className="text-sm font-medium text-orange-600">₹3,200</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Tips */}
-        <div className="mt-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-3xl p-8 text-white">
-          <div className="text-center space-y-4">
-            <h2 className="text-2xl font-bold">💡 Pro Tip</h2>
-            <p className="text-blue-100 max-w-2xl mx-auto">
-              Set up automatic reminders for overdue invoices to improve your cash flow. 
-              You can also create invoice templates to save time on recurring clients.
-            </p>
-            <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
-              Learn More
-            </button>
-          </div>
         </div>
       </div>
     </div>
