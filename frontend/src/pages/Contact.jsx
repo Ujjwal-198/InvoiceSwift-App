@@ -24,8 +24,8 @@ const Contact = () => {
         {
             icon: <FiMail className="text-xl" />,
             title: "Email",
-            value: "ujjwalsingh.dev@gmail.com",
-            action: () => window.open('mailto:ujjwalsingh.dev@gmail.com')
+            value: "kumarujjwalsingh76@gmail.com",
+            action: () => window.open('mailto:kumarujjwalsingh76@gmail.com')
         },
         {
             icon: <FiPhone className="text-xl" />,
@@ -149,8 +149,8 @@ const Contact = () => {
                             <h3 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
                             <div className="space-y-4">
                                 {contactInfo.map((info, index) => (
-                                    <div 
-                                        key={index} 
+                                    <div
+                                        key={index}
                                         className={`flex items-center space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200 ${info.action ? 'cursor-pointer' : ''}`}
                                         onClick={info.action}
                                     >
