@@ -9,7 +9,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     
     return (
-        <footer className="bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+        <footer className="bg-linear-to-r from-gray-900 to-gray-800 text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Main Footer Content */}
                 <div className="py-12">
