@@ -18,6 +18,8 @@ export async function handleInvoiceSave(req, res) {
             });
         }
 
+        console.log("💾 BACKEND - Received invoice data:", data);
+        
         const {
             invoiceNumber,
             currency,
@@ -34,8 +36,18 @@ export async function handleInvoiceSave(req, res) {
             tax,
             shipping,
             amountPaid,
-            balanceDue
+            balanceDue,
+            subtotal,
+            total,
+            discountAmount,
+            taxAmount
         } = data;
+        
+        console.log("💾 BACKEND - Extracted values:");
+        console.log("  - Discount %:", discount);
+        console.log("  - Tax %:", tax);
+        console.log("  - Subtotal:", subtotal);
+        console.log("  - Total:", total);
 
         if (
             !invoiceNumber ||
@@ -121,7 +133,8 @@ export async function handleInvoiceSave(req, res) {
                 id: item.id,
                 itemName: item.itemName,
                 quantity: item.quantity,
-                price: item.price
+                price: item.price,
+                total: item.total || (item.quantity * item.price)
             })),
             notes: notes || '',
             terms: terms || '',
@@ -129,7 +142,11 @@ export async function handleInvoiceSave(req, res) {
             tax,
             shipping,
             amountPaid,
-            balanceDue
+            balanceDue,
+            subtotal: subtotal || 0,
+            total: total || 0,
+            discountAmount: discountAmount || 0,
+            taxAmount: taxAmount || 0
         });
 
         const savedInvoice = await Invoice.create(newInvoice);
@@ -271,6 +288,10 @@ export async function handleGetInvoiceByNumber(req, res) {
             shipping: invoice.shipping || 0,
             amountPaid: invoice.amountPaid || 0,
             balanceDue: invoice.balanceDue || 0,
+            subtotal: invoice.subtotal || 0,
+            total: invoice.total || 0,
+            discountAmount: invoice.discountAmount || 0,
+            taxAmount: invoice.taxAmount || 0,
         };
 
         return res.status(200).json({

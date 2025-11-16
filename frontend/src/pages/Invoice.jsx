@@ -100,6 +100,12 @@ const Invoice = () => {
 
 
     const onSubmit = async (data) => {
+        console.log("💾 INVOICE SAVE - Form Data Being Saved:", data);
+        console.log("💾 INVOICE SAVE - Discount:", data.discount);
+        console.log("💾 INVOICE SAVE - Tax:", data.tax);
+        console.log("💾 INVOICE SAVE - Subtotal:", data.subtotal);
+        console.log("💾 INVOICE SAVE - Total:", data.total);
+        
         setFormData(data);
         setViewError(null);
         try {
